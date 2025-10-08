@@ -17,6 +17,7 @@ public class ServerThread implements Runnable{
             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 
+            Server.register(oos);
 
             while(true){
                 Object cMsg = ois.readObject();
@@ -24,9 +25,8 @@ public class ServerThread implements Runnable{
                 System.out.println("From client:" + (String) cMsg);
 
                 String serverMsg = (String) cMsg;
-                serverMsg = serverMsg.toUpperCase();
 
-                oos.writeObject(serverMsg);
+                Server.broadcast(serverMsg);
             }
         } catch (Exception e){
             System.out.println("Thread interrupted!");

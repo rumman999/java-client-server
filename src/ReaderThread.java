@@ -17,7 +17,7 @@ public class ReaderThread implements Runnable{
             try{
                 Object received = ois.readObject();
 
-                System.out.println(name + " - got says: " + (String) received);
+                System.out.println("New Message: " + (String) received);
             } catch (Exception e){
                 System.out.println("Thread interrupted");
             }
